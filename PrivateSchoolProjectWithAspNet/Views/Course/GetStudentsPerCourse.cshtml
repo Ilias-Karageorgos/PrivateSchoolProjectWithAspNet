@@ -1,0 +1,14 @@
+﻿@model IEnumerable<PrivateSchoolProjectWithAspNet.Models.Course>
+
+<p>
+    @foreach (var course in Model)
+	{
+		@course.Title;
+
+		foreach (var stu in course.Students)
+		{
+			@stu.LastName;
+		}
+	}
+</p>
+

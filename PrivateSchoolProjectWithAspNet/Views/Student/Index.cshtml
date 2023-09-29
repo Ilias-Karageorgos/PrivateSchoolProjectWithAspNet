@@ -1,0 +1,96 @@
+﻿@model IEnumerable<PrivateSchoolProjectWithAspNet.Models.Student>
+
+<strong>All students</strong>
+
+<ul>
+
+    @foreach (var student in Model)
+    {
+        <li>@student.StudentId @student.LastName @student.FirstName @student.DateOfBirth @student.TuitionFees</li>
+    }
+</ul>
+
+<form action="Student/CreateStudent" method="post">
+
+    <input type="text" name="FirstName" value="FirstName" />
+    <input type="text" name="LastName" value="LastName" />
+    <input type="date" name="DateOfBirth" value="DateOfBirth"/>
+    <input type="number" name="TuitionFees" value="TuitionFees" />
+
+    <input type="submit" value="Create Student" />
+
+</form>
+
+<button id="longLastName">Show the Student with the longest Lastname</button>
+
+<p>
+
+</p>
+
+<button id="searchStudentWithO">  Koumpi  </button>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<script>
+
+    $("#longLastName").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/Student/getLongestLastnameStudent",
+            dataType: "json",
+            success: function (response) {
+
+                $("p").append(response);
+
+            }
+        });
+    });
+
+    $("#searchStudentWithO").click(function () {
+
+
+        $.ajax({
+            type: "GET",
+            url: "/Student/GetFirstStudent",
+            dataType: "json",
+            success: function (response) {
+
+                if (response.LastName.includes('o') || response.LastName.includes('O')) {
+
+                    $.ajax({
+                        type: "GET",
+                        url: "https://api.nobelprize.org/v1/country.json ",
+                        dataType: "json",
+                        success: function (response) {
+
+                            let countries = response.countries;
+                            console.log(countries);
+
+                            for (var country of countries) {
+
+                                let template = `
+                                      <option value=${country.code}>${country.name}</option>
+                                    `;
+
+                                let ele = $(template);
+
+                                 $("p").append(ele);
+                            }
+                        }
+                    });
+                }
+                else {
+
+                    $.ajax({
+                        type: "GET",
+                        url: "https://localhost:44327/Student/CreateRandomStudent",
+                        dataType: "json",
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+                }
+            }
+        });
+    });
+</script>

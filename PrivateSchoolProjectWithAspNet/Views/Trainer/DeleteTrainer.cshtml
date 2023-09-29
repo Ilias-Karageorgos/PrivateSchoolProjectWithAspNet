@@ -1,0 +1,49 @@
+﻿@model PrivateSchoolProjectWithAspNet.Models.Trainer
+
+@{
+    ViewBag.Title = "Delete Trainer";
+}
+
+<h2>DeleteTrainer</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Trainer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+    </dl>
+
+    <form action="/Trainer/Delete" method="post">
+        <input type="hidden" name="id" value="@Model.TrainerId" />
+
+        <input class="bg-danger" type="submit" value="Delete Trainer" />
+    </form>
+
+    <form action="/Trainer/GetTrainers" method="post">
+        <input type="submit" value="Go back" />
+    </form>
+</div>

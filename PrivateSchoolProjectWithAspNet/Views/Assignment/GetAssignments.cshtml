@@ -1,0 +1,57 @@
+﻿@model IEnumerable<PrivateSchoolProjectWithAspNet.Models.Assignment>
+
+@{
+    ViewBag.Title = "GetAssignments";
+}
+
+<h2>All Assignments</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateAssignment")
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OralMark)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalMark)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OralMark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalMark)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditAssignment", new { id = item.AssignmentId }) |
+            @Html.ActionLink("Details", "GetAssignment", new { id = item.AssignmentId }) |
+            @Html.ActionLink("Delete", "DeleteAssignment", new { id = item.AssignmentId })
+        </td>
+    </tr>
+}
+
+</table>

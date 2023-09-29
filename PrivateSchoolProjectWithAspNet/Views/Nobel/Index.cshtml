@@ -1,0 +1,29 @@
+﻿<h1>List of Female Laureates Born in Germany, Died in Usa</h1>
+<div?>
+
+</div?>
+
+<button class="btn btn-secondary" id="nobelButton">Check Request</button>
+
+<article>
+
+
+</article>
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<script>
+
+    $("#nobelButton").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/Nobel/GetLaureates",
+            dataType: "json",
+            success: function (response) {
+
+                $("article").append(response);
+            }
+        });
+    });
+</script>
